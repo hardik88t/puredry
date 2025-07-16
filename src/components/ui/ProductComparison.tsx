@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Product } from '@/types/product';
 
 interface ProductComparisonProps {
@@ -34,8 +34,18 @@ const ProductComparison = ({ products, onClose }: ProductComparisonProps) => {
     { key: 'minOrder', label: 'Min Order Qty', path: 'minOrderQuantity' }
   ];
 
-  const getNestedValue = (obj: any, path: string) => {
-    return path.split('.').reduce((current, key) => current?.[key], obj);
+  const getNestedValue = (obj: unknown, path: string): string | number => {
+    const result = path.split('.').reduce((current: unknown, key: string) => {
+      if (current && typeof current === 'object' && key in current) {
+        return (current as Record<string, unknown>)[key];
+      }
+      return undefined;
+    }, obj);
+
+    if (typeof result === 'string' || typeof result === 'number') {
+      return result;
+    }
+    return '';
   };
 
   return (
@@ -130,11 +140,25 @@ const ProductComparison = ({ products, onClose }: ProductComparisonProps) => {
                       <td className="p-4 border-b border-gray-100 font-medium text-gray-900">
                         {attr.label}
                       </td>
-                      {selectedProducts.map((product) => (
-                        <td key={product.id} className="p-4 border-b border-gray-100 text-gray-600">
-                          {attr.path ? getNestedValue(product, attr.path) : product[attr.key as keyof Product]}
-                        </td>
-                      ))}
+                      {selectedProducts.map((product) => {
+                        let value: string | number = '';
+                        if (attr.path) {
+                          value = getNestedValue(product, attr.path);
+                        } else {
+                          const productValue = product[attr.key as keyof Product];
+                          if (typeof productValue === 'string' || typeof productValue === 'number') {
+                            value = productValue;
+                          } else {
+                            value = String(productValue);
+                          }
+                        }
+
+                        return (
+                          <td key={product.id} className="p-4 border-b border-gray-100 text-gray-600">
+                            {value}
+                          </td>
+                        );
+                      })}
                     </tr>
                   ))}
                 </tbody>
