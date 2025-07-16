@@ -14,7 +14,7 @@ interface ProductFiltersProps {
 const ProductFilters = ({ filters, onFiltersChange, categories, productCount }: ProductFiltersProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleFilterChange = (key: keyof ProductFilter, value: any) => {
+  const handleFilterChange = (key: keyof ProductFilter, value: string | boolean | undefined) => {
     onFiltersChange({
       ...filters,
       [key]: value
@@ -71,12 +71,12 @@ const ProductFilters = ({ filters, onFiltersChange, categories, productCount }: 
 
       {/* Filter Content */}
       <AnimatePresence>
-        {(isOpen || window.innerWidth >= 1024) && (
+        {isOpen && (
           <motion.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="overflow-hidden"
+            className="overflow-hidden lg:hidden"
           >
             <div className="p-4 space-y-6">
               {/* Search */}
@@ -199,6 +199,126 @@ const ProductFilters = ({ filters, onFiltersChange, categories, productCount }: 
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Desktop Filter Content - Always Visible */}
+      <div className="hidden lg:block p-4 space-y-6">
+        {/* Search */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Search Products
+          </label>
+          <input
+            type="text"
+            placeholder="Search by name, description, or tags..."
+            value={filters.search || ''}
+            onChange={(e) => handleFilterChange('search', e.target.value)}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+          />
+        </div>
+
+        {/* Category Filter */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Category
+          </label>
+          <select
+            value={filters.category || 'all'}
+            onChange={(e) => handleFilterChange('category', e.target.value === 'all' ? undefined : e.target.value)}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+          >
+            <option value="all">All Categories</option>
+            {categories.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* Availability Filter */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Availability
+          </label>
+          <select
+            value={filters.availability || ''}
+            onChange={(e) => handleFilterChange('availability', e.target.value || undefined)}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+          >
+            {availabilityOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* Featured Filter */}
+        <div>
+          <label className="flex items-center">
+            <input
+              type="checkbox"
+              checked={filters.featured || false}
+              onChange={(e) => handleFilterChange('featured', e.target.checked || undefined)}
+              className="rounded border-gray-300 text-amber-600 focus:ring-amber-500"
+            />
+            <span className="ml-2 text-sm text-gray-700">Featured products only</span>
+          </label>
+        </div>
+
+        {/* Sort Options */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Sort By
+          </label>
+          <div className="space-y-2">
+            <select
+              value={filters.sortBy || 'name'}
+              onChange={(e) => handleFilterChange('sortBy', e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+            >
+              {sortOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+
+            <div className="flex gap-2">
+              <button
+                onClick={() => handleFilterChange('sortOrder', 'asc')}
+                className={`flex-1 px-3 py-2 text-sm rounded-lg border ${
+                  filters.sortOrder === 'asc'
+                    ? 'bg-amber-600 text-white border-amber-600'
+                    : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+                }`}
+              >
+                Ascending
+              </button>
+              <button
+                onClick={() => handleFilterChange('sortOrder', 'desc')}
+                className={`flex-1 px-3 py-2 text-sm rounded-lg border ${
+                  filters.sortOrder === 'desc'
+                    ? 'bg-amber-600 text-white border-amber-600'
+                    : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+                }`}
+              >
+                Descending
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Clear Filters */}
+        <div className="pt-4 border-t border-gray-200">
+          <button
+            onClick={clearFilters}
+            className="w-full px-4 py-2 text-sm text-amber-600 border border-amber-600 rounded-lg hover:bg-amber-50 transition-colors"
+          >
+            Clear All Filters
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

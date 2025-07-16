@@ -2,9 +2,8 @@
 
 import { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import Link from 'next/link';
 import { sampleProducts, productCategories } from '@/data/products';
-import { Product, ProductFilter } from '@/types/product';
+import { ProductFilter } from '@/types/product';
 import ProductCard from '@/components/products/ProductCard';
 import ProductFilters from '@/components/products/ProductFilters';
 import CategoryGrid from '@/components/products/CategoryGrid';

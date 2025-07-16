@@ -175,7 +175,7 @@ export default function QualityPage() {
                 Our Quality Promise
               </h2>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                At PureDry, quality isn't just a goal—it's our foundation. Every product that leaves our facility 
+                At PureDry, quality isn&apos;t just a goal—it&apos;s our foundation. Every product that leaves our facility
                 has undergone rigorous testing and quality control measures to ensure it meets the highest 
                 international standards.
               </p>

@@ -102,7 +102,7 @@ export default function AboutPage() {
               About PureDry
             </h1>
             <p className="text-xl text-amber-100 max-w-3xl mx-auto leading-relaxed">
-              For over 25 years, we've been dedicated to providing the world's finest dehydrated food products, 
+              For over 25 years, we&apos;ve been dedicated to providing the world&apos;s finest dehydrated food products,
               combining traditional expertise with modern technology to serve customers globally.
             </p>
           </motion.div>
@@ -123,13 +123,13 @@ export default function AboutPage() {
                 Our Story
               </h2>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                PureDry began as a small family business in 1998 with a simple mission: to preserve nature's goodness 
+                PureDry began as a small family business in 1998 with a simple mission: to preserve nature&apos;s goodness
                 through advanced dehydration techniques. What started in a modest facility has grown into a global 
                 enterprise serving customers in over 50 countries.
               </p>
               <p className="text-gray-600 mb-6 leading-relaxed">
                 Our journey has been marked by continuous innovation, unwavering commitment to quality, and a deep 
-                understanding of our customers' needs. Today, we're proud to be a trusted partner to food manufacturers, 
+                understanding of our customers&apos; needs. Today, we&apos;re proud to be a trusted partner to food manufacturers,
                 restaurants, and distributors worldwide.
               </p>
               <div className="grid grid-cols-2 gap-6 mt-8">
@@ -266,7 +266,7 @@ export default function AboutPage() {
               Meet Our Team
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              The dedicated professionals behind PureDry's success
+              The dedicated professionals behind PureDry&apos;s success
             </p>
           </motion.div>
 

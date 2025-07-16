@@ -13,7 +13,7 @@ const Testimonials = () => {
       company: 'Gourmet Restaurant Chain',
       country: 'United States',
       image: '👩‍🍳',
-      quote: 'PureDry\'s dehydrated vegetables have transformed our kitchen operations. The quality is consistently excellent, and the flavor retention is remarkable. Our customers can taste the difference.',
+      quote: 'PureDry&apos;s dehydrated vegetables have transformed our kitchen operations. The quality is consistently excellent, and the flavor retention is remarkable. Our customers can taste the difference.',
       rating: 5
     },
     {
@@ -22,7 +22,7 @@ const Testimonials = () => {
       company: 'Global Food Manufacturing',
       country: 'Mexico',
       image: '👨‍💼',
-      quote: 'We\'ve been sourcing from PureDry for over 5 years. Their reliability, quality standards, and timely delivery have made them our preferred supplier for dehydrated ingredients.',
+      quote: 'We&apos;ve been sourcing from PureDry for over 5 years. Their reliability, quality standards, and timely delivery have made them our preferred supplier for dehydrated ingredients.',
       rating: 5
     },
     {
@@ -100,7 +100,7 @@ const Testimonials = () => {
 
               {/* Quote */}
               <blockquote className="text-lg md:text-xl text-gray-700 mb-6 leading-relaxed italic">
-                "{testimonials[activeTestimonial].quote}"
+                &ldquo;{testimonials[activeTestimonial].quote}&rdquo;
               </blockquote>
 
               {/* Author Info */}
