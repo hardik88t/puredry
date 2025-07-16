@@ -131,8 +131,9 @@ const ProductCard = ({ product, viewMode }: ProductCardProps) => {
 
   return (
     <motion.div
-      whileHover={{ scale: 1.05 }}
-      className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden"
+      whileHover={{ scale: 1.02 }}
+      transition={{ duration: 0.2 }}
+      className="bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden h-full flex flex-col"
     >
       {/* Product Image */}
       <div className="aspect-square bg-gradient-to-br from-amber-100 to-orange-100 flex items-center justify-center text-6xl">
@@ -140,8 +141,8 @@ const ProductCard = ({ product, viewMode }: ProductCardProps) => {
       </div>
 
       {/* Product Info */}
-      <div className="p-6">
-        <div className="flex items-center gap-2 mb-2">
+      <div className="p-6 flex flex-col flex-1">
+        <div className="flex items-center gap-2 mb-3">
           <span className={`px-2 py-1 rounded-full text-xs font-medium ${getAvailabilityColor(product.availability)}`}>
             {product.availability.replace('-', ' ')}
           </span>
@@ -152,13 +153,13 @@ const ProductCard = ({ product, viewMode }: ProductCardProps) => {
           )}
         </div>
 
-        <h3 className="text-lg font-bold text-gray-900 mb-2">
+        <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2">
           <Link href={`/products/${product.id}`} className="hover:text-amber-600 transition-colors">
             {product.name}
           </Link>
         </h3>
 
-        <p className="text-gray-600 text-sm mb-4 line-clamp-2">
+        <p className="text-gray-600 text-sm mb-4 line-clamp-2 leading-relaxed">
           {product.shortDescription}
         </p>
 
@@ -170,7 +171,7 @@ const ProductCard = ({ product, viewMode }: ProductCardProps) => {
           ))}
         </div>
 
-        <div className="text-sm text-gray-600 mb-4 space-y-1">
+        <div className="text-sm text-gray-600 mb-4 space-y-1 flex-1">
           <div><span className="font-medium">Origin:</span> {product.specifications.origin}</div>
           <div><span className="font-medium">MOQ:</span> {product.minOrderQuantity}</div>
         </div>
@@ -184,14 +185,14 @@ const ProductCard = ({ product, viewMode }: ProductCardProps) => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 mt-auto">
           <Link
             href={`/products/${product.id}`}
-            className="bg-amber-600 text-white px-4 py-2 rounded-lg text-center text-sm hover:bg-amber-700 transition-colors"
+            className="bg-amber-600 text-white px-4 py-2 rounded-lg text-center text-sm font-medium hover:bg-amber-700 transition-colors"
           >
             View Details
           </Link>
-          <button className="border border-amber-600 text-amber-600 px-4 py-2 rounded-lg text-sm hover:bg-amber-50 transition-colors">
+          <button className="border border-amber-600 text-amber-600 px-4 py-2 rounded-lg text-sm font-medium hover:bg-amber-50 transition-colors">
             Get Quote
           </button>
         </div>

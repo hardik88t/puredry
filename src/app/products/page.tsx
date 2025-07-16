@@ -149,8 +149,8 @@ export default function ProductsPage() {
               {/* Products Display */}
               {filteredProducts.length > 0 ? (
                 <div className={`grid gap-6 ${
-                  viewMode === 'grid' 
-                    ? 'grid-cols-1 md:grid-cols-2 xl:grid-cols-3' 
+                  viewMode === 'grid'
+                    ? 'grid-cols-1 md:grid-cols-2 xl:grid-cols-3 auto-rows-fr'
                     : 'grid-cols-1'
                 }`}>
                   {filteredProducts.map((product, index) => (

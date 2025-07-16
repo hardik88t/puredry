@@ -92,50 +92,62 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="relative"
           >
-            <div className="grid grid-cols-2 gap-4">
-              {/* Product Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 auto-rows-fr">
+              {/* Product Cards - All with consistent height */}
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                className="bg-white rounded-xl shadow-lg p-6 text-center"
+                transition={{ duration: 0.2 }}
+                className="bg-white rounded-xl shadow-lg p-6 text-center flex flex-col justify-between h-full"
               >
-                <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl">🧅</span>
+                <div>
+                  <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-2xl">🧅</span>
+                  </div>
+                  <h3 className="font-semibold text-gray-900 mb-2">Dehydrated Onions</h3>
                 </div>
-                <h3 className="font-semibold text-gray-900 mb-2">Dehydrated Onions</h3>
-                <p className="text-sm text-gray-600">Premium quality, long-lasting flavor</p>
+                <p className="text-sm text-gray-600 leading-relaxed">Premium quality, long-lasting flavor</p>
               </motion.div>
 
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                className="bg-white rounded-xl shadow-lg p-6 text-center mt-8"
+                transition={{ duration: 0.2 }}
+                className="bg-white rounded-xl shadow-lg p-6 text-center flex flex-col justify-between h-full"
               >
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl">🥕</span>
+                <div>
+                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-2xl">🥕</span>
+                  </div>
+                  <h3 className="font-semibold text-gray-900 mb-2">Dried Vegetables</h3>
                 </div>
-                <h3 className="font-semibold text-gray-900 mb-2">Dried Vegetables</h3>
-                <p className="text-sm text-gray-600">Nutrient-rich, farm-fresh</p>
+                <p className="text-sm text-gray-600 leading-relaxed">Nutrient-rich, farm-fresh</p>
               </motion.div>
 
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                className="bg-white rounded-xl shadow-lg p-6 text-center -mt-4"
+                transition={{ duration: 0.2 }}
+                className="bg-white rounded-xl shadow-lg p-6 text-center flex flex-col justify-between h-full"
               >
-                <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl">🌶️</span>
+                <div>
+                  <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-2xl">🌶️</span>
+                  </div>
+                  <h3 className="font-semibold text-gray-900 mb-2">Herbs & Spices</h3>
                 </div>
-                <h3 className="font-semibold text-gray-900 mb-2">Herbs & Spices</h3>
-                <p className="text-sm text-gray-600">Aromatic, authentic flavors</p>
+                <p className="text-sm text-gray-600 leading-relaxed">Aromatic, authentic flavors</p>
               </motion.div>
 
               <motion.div
                 whileHover={{ scale: 1.05 }}
-                className="bg-white rounded-xl shadow-lg p-6 text-center mt-4"
+                transition={{ duration: 0.2 }}
+                className="bg-white rounded-xl shadow-lg p-6 text-center flex flex-col justify-between h-full"
               >
-                <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl">🍎</span>
+                <div>
+                  <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span className="text-2xl">🍎</span>
+                  </div>
+                  <h3 className="font-semibold text-gray-900 mb-2">Dried Fruits</h3>
                 </div>
-                <h3 className="font-semibold text-gray-900 mb-2">Dried Fruits</h3>
-                <p className="text-sm text-gray-600">Natural sweetness preserved</p>
+                <p className="text-sm text-gray-600 leading-relaxed">Natural sweetness preserved</p>
               </motion.div>
             </div>
           </motion.div>
