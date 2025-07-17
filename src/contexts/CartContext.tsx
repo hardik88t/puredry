@@ -46,7 +46,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
         // Convert date strings back to Date objects
         parsedCart.createdAt = new Date(parsedCart.createdAt);
         parsedCart.updatedAt = new Date(parsedCart.updatedAt);
-        parsedCart.items = parsedCart.items.map((item: any) => ({
+        parsedCart.items = parsedCart.items.map((item: CartItem & { addedAt: string }) => ({
           ...item,
           addedAt: new Date(item.addedAt)
         }));

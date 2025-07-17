@@ -2,9 +2,21 @@
 
 import { useTheme } from '@/contexts/ThemeContext';
 import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
 
 const ThemeToggle = () => {
   const { theme, toggleTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <div className="relative p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors duration-200 w-10 h-10" />
+    );
+  }
 
   return (
     <motion.button

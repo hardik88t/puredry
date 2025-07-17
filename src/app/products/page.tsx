@@ -111,6 +111,7 @@ export default function ProductsPage() {
                 filters={filters}
                 onFiltersChange={setFilters}
                 categories={productCategories}
+                products={sampleProducts}
                 productCount={filteredProducts.length}
               />
             </div>

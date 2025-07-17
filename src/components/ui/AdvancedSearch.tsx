@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, useMemo } from 'react';
+import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Product, ProductCategory } from '@/types/product';
 import Icon from '@/components/ui/Icon';
@@ -150,6 +150,34 @@ const AdvancedSearch = ({
     return score;
   };
 
+  const handleSearch = useCallback(() => {
+    if (!query.trim()) return;
+
+    // Add to recent searches
+    const newRecent = [query, ...recentSearches.filter(s => s !== query)].slice(0, 5);
+    setRecentSearches(newRecent);
+    localStorage.setItem('puredry-recent-searches', JSON.stringify(newRecent));
+
+    onSearch(query);
+    setIsOpen(false);
+    setSelectedIndex(-1);
+  }, [query, recentSearches, onSearch]);
+
+  const handleSuggestionSelect = useCallback((suggestion: SearchSuggestion) => {
+    if (suggestion.type === 'product') {
+      const product = products.find(p => p.id === suggestion.id);
+      if (product && onProductSelect) {
+        onProductSelect(product);
+      }
+    } else {
+      setQuery(suggestion.title);
+      onSearch(suggestion.title);
+    }
+
+    setIsOpen(false);
+    setSelectedIndex(-1);
+  }, [products, onProductSelect, onSearch]);
+
   // Handle keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -158,7 +186,7 @@ const AdvancedSearch = ({
       switch (e.key) {
         case 'ArrowDown':
           e.preventDefault();
-          setSelectedIndex(prev => 
+          setSelectedIndex(prev =>
             prev < suggestions.length - 1 ? prev + 1 : prev
           );
           break;
@@ -184,7 +212,7 @@ const AdvancedSearch = ({
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, selectedIndex, suggestions, query]);
+  }, [isOpen, selectedIndex, suggestions, query, handleSearch, handleSuggestionSelect]);
 
   // Handle clicks outside
   useEffect(() => {
@@ -210,34 +238,6 @@ const AdvancedSearch = ({
       }
     }
   }, []);
-
-  const handleSearch = () => {
-    if (!query.trim()) return;
-
-    // Add to recent searches
-    const newRecent = [query, ...recentSearches.filter(s => s !== query)].slice(0, 5);
-    setRecentSearches(newRecent);
-    localStorage.setItem('puredry-recent-searches', JSON.stringify(newRecent));
-
-    onSearch(query);
-    setIsOpen(false);
-    setSelectedIndex(-1);
-  };
-
-  const handleSuggestionSelect = (suggestion: SearchSuggestion) => {
-    if (suggestion.type === 'product') {
-      const product = products.find(p => p.id === suggestion.id);
-      if (product && onProductSelect) {
-        onProductSelect(product);
-      }
-    } else {
-      setQuery(suggestion.title);
-      onSearch(suggestion.title);
-    }
-    
-    setIsOpen(false);
-    setSelectedIndex(-1);
-  };
 
   const getSuggestionIcon = (type: string) => {
     switch (type) {

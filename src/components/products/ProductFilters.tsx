@@ -289,7 +289,7 @@ const ProductFilters = ({ filters, onFiltersChange, categories, products, produc
                         onChange={(e) => handleNutritionFilterChange('highFiber', e.target.checked)}
                         className="rounded border-gray-300 text-amber-600 focus:ring-amber-500"
                       />
-                      <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">High Fiber (>5g per 100g)</span>
+                      <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">High Fiber (&gt;5g per 100g)</span>
                     </label>
 
                     <label className="flex items-center">
@@ -519,7 +519,7 @@ const ProductFilters = ({ filters, onFiltersChange, categories, products, produc
                   onChange={(e) => handleNutritionFilterChange('highFiber', e.target.checked)}
                   className="rounded border-gray-300 text-amber-600 focus:ring-amber-500"
                 />
-                <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">High Fiber (>5g per 100g)</span>
+                <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">High Fiber (&gt;5g per 100g)</span>
               </label>
 
               <label className="flex items-center">

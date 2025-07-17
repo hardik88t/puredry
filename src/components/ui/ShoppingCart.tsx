@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '@/contexts/CartContext';
+import { CartItem } from '@/types/cart';
 import Icon from '@/components/ui/Icon';
 import QuoteRequestForm from '@/components/ui/QuoteRequestForm';
 
@@ -42,7 +43,7 @@ const ShoppingCart = ({ isOpen, onClose }: ShoppingCartProps) => {
     }).format(price);
   };
 
-  const getItemTotal = (item: any) => {
+  const getItemTotal = (item: CartItem) => {
     const product = item.product;
     let price = 0;
     

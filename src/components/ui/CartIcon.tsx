@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useCart } from '@/contexts/CartContext';
 import Icon from '@/components/ui/Icon';
@@ -8,9 +8,20 @@ import ShoppingCart from '@/components/ui/ShoppingCart';
 
 const CartIcon = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const { getCartSummary } = useCart();
-  
+
   const summary = getCartSummary();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <div className="relative p-2 text-gray-700 hover:text-amber-600 transition-colors w-10 h-10" />
+    );
+  }
 
   return (
     <>

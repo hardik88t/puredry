@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Icon from '@/components/ui/Icon';
 import ThemeToggle from '@/components/ui/ThemeToggle';
 import CartIcon from '@/components/ui/CartIcon';
+import ClientOnly from '@/components/ui/ClientOnly';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -67,8 +68,12 @@ const Header = () => {
 
           {/* CTA Button, Cart, and Theme Toggle */}
           <div className="hidden lg:flex items-center space-x-4">
-            <CartIcon />
-            <ThemeToggle />
+            <ClientOnly fallback={<div className="w-10 h-10" />}>
+              <CartIcon />
+            </ClientOnly>
+            <ClientOnly fallback={<div className="w-10 h-10" />}>
+              <ThemeToggle />
+            </ClientOnly>
             <Link
               href="/contact"
               className="bg-amber-600 text-white px-6 py-2 rounded-lg hover:bg-amber-700 transition-colors duration-200"
@@ -79,8 +84,12 @@ const Header = () => {
 
           {/* Mobile cart, theme toggle and menu button */}
           <div className="lg:hidden flex items-center space-x-2">
-            <CartIcon />
-            <ThemeToggle />
+            <ClientOnly fallback={<div className="w-10 h-10" />}>
+              <CartIcon />
+            </ClientOnly>
+            <ClientOnly fallback={<div className="w-10 h-10" />}>
+              <ThemeToggle />
+            </ClientOnly>
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="p-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 transition-colors duration-200"
