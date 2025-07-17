@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Icon from '@/components/ui/Icon';
 
 const HeroSection = () => {
   return (
@@ -100,8 +101,8 @@ const HeroSection = () => {
                 className="bg-white rounded-xl shadow-lg p-6 text-center flex flex-col justify-between h-full"
               >
                 <div>
-                  <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl">🧅</span>
+                  <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4 text-amber-600">
+                    <Icon name="onion" size="lg" aria-label="Dehydrated onions" />
                   </div>
                   <h3 className="font-semibold text-gray-900 mb-2">Dehydrated Onions</h3>
                 </div>
@@ -109,13 +110,13 @@ const HeroSection = () => {
               </motion.div>
 
               <motion.div
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.2 }}
                 className="bg-white rounded-xl shadow-lg p-6 text-center flex flex-col justify-between h-full"
               >
                 <div>
-                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl">🥕</span>
+                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 text-green-600">
+                    <Icon name="carrot" size="lg" aria-label="Dried vegetables" />
                   </div>
                   <h3 className="font-semibold text-gray-900 mb-2">Dried Vegetables</h3>
                 </div>
@@ -123,13 +124,13 @@ const HeroSection = () => {
               </motion.div>
 
               <motion.div
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.2 }}
                 className="bg-white rounded-xl shadow-lg p-6 text-center flex flex-col justify-between h-full"
               >
                 <div>
-                  <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl">🌶️</span>
+                  <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4 text-red-600">
+                    <Icon name="pepper" size="lg" aria-label="Herbs and spices" />
                   </div>
                   <h3 className="font-semibold text-gray-900 mb-2">Herbs & Spices</h3>
                 </div>
@@ -137,13 +138,13 @@ const HeroSection = () => {
               </motion.div>
 
               <motion.div
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.2 }}
                 className="bg-white rounded-xl shadow-lg p-6 text-center flex flex-col justify-between h-full"
               >
                 <div>
-                  <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <span className="text-2xl">🍎</span>
+                  <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4 text-orange-600">
+                    <Icon name="apple" size="lg" aria-label="Dried fruits" />
                   </div>
                   <h3 className="font-semibold text-gray-900 mb-2">Dried Fruits</h3>
                 </div>

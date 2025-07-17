@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { useFormValidation, commonValidationRules } from '@/hooks/useFormValidation';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -13,19 +14,67 @@ export default function ContactPage() {
     message: ''
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const { errors, validateField, validateForm, clearError } = useFormValidation({
+    name: commonValidationRules.name,
+    email: commonValidationRules.email,
+    company: commonValidationRules.company,
+    phone: commonValidationRules.phone,
+    message: commonValidationRules.message
+  });
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
+
+    // Clear error when user starts typing
+    if (errors[name]) {
+      clearError(name);
+    }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    validateField(name, value);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
-    // Reset form or show success message
+
+    if (!validateForm(formData)) {
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 2000));
+
+      console.log('Form submitted:', formData);
+      setSubmitStatus('success');
+
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        company: '',
+        phone: '',
+        inquiryType: 'general',
+        message: ''
+      });
+    } catch (error) {
+      console.error('Form submission error:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const contactInfo = [
@@ -140,9 +189,20 @@ export default function ContactPage() {
                       required
                       value={formData.name}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors duration-200"
+                      onBlur={handleBlur}
+                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors duration-200 ${
+                        errors.name ? 'border-red-500 bg-red-50' : 'border-gray-300'
+                      }`}
                       placeholder="Your full name"
+                      aria-invalid={errors.name ? 'true' : 'false'}
+                      aria-describedby={errors.name ? 'name-error' : undefined}
                     />
+                    {errors.name && (
+                      <p id="name-error" className="text-red-500 text-sm mt-1 flex items-center">
+                        <span className="mr-1">⚠️</span>
+                        {errors.name}
+                      </p>
+                    )}
                   </div>
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
@@ -155,9 +215,20 @@ export default function ContactPage() {
                       required
                       value={formData.email}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors duration-200"
+                      onBlur={handleBlur}
+                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors duration-200 ${
+                        errors.email ? 'border-red-500 bg-red-50' : 'border-gray-300'
+                      }`}
                       placeholder="your.email@company.com"
+                      aria-invalid={errors.email ? 'true' : 'false'}
+                      aria-describedby={errors.email ? 'email-error' : undefined}
                     />
+                    {errors.email && (
+                      <p id="email-error" className="text-red-500 text-sm mt-1 flex items-center">
+                        <span className="mr-1">⚠️</span>
+                        {errors.email}
+                      </p>
+                    )}
                   </div>
                 </div>
 
@@ -230,10 +301,44 @@ export default function ContactPage() {
 
                 <button
                   type="submit"
-                  className="w-full bg-amber-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-amber-700 focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 transition-colors duration-200"
+                  disabled={isSubmitting}
+                  className={`w-full py-3 px-6 rounded-lg font-semibold focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 transition-colors duration-200 ${
+                    isSubmitting
+                      ? 'bg-gray-400 cursor-not-allowed'
+                      : 'bg-amber-600 hover:bg-amber-700 text-white'
+                  }`}
                 >
-                  Send Message
+                  {isSubmitting ? (
+                    <span className="flex items-center justify-center">
+                      <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Sending...
+                    </span>
+                  ) : (
+                    'Send Message'
+                  )}
                 </button>
+
+                {/* Success/Error Messages */}
+                {submitStatus === 'success' && (
+                  <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded-lg">
+                    <p className="text-green-800 flex items-center">
+                      <span className="mr-2">✅</span>
+                      Message sent successfully! We'll get back to you soon.
+                    </p>
+                  </div>
+                )}
+
+                {submitStatus === 'error' && (
+                  <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+                    <p className="text-red-800 flex items-center">
+                      <span className="mr-2">❌</span>
+                      Failed to send message. Please try again.
+                    </p>
+                  </div>
+                )}
               </form>
             </motion.div>
 

@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Product } from '@/types/product';
+import Icon from '@/components/ui/Icon';
 
 interface ProductCardProps {
   product: Product;
@@ -28,15 +29,15 @@ const ProductCard = ({ product, viewMode }: ProductCardProps) => {
   const getCategoryIcon = (category: string) => {
     switch (category) {
       case 'vegetables':
-        return '🥕';
+        return <Icon name="carrot" size="xl" aria-label="Vegetables category" />;
       case 'fruits':
-        return '🍎';
+        return <Icon name="apple" size="xl" aria-label="Fruits category" />;
       case 'herbs-spices':
-        return '🌿';
+        return <Icon name="herbs" size="xl" aria-label="Herbs and spices category" />;
       case 'custom':
-        return '⚗️';
+        return <Icon name="factory" size="xl" aria-label="Custom products category" />;
       default:
-        return '📦';
+        return <Icon name="factory" size="xl" aria-label="Product category" />;
     }
   };
 
@@ -49,7 +50,7 @@ const ProductCard = ({ product, viewMode }: ProductCardProps) => {
         <div className="flex flex-col md:flex-row gap-6">
           {/* Product Image */}
           <div className="md:w-48 flex-shrink-0">
-            <div className="aspect-square bg-gradient-to-br from-amber-100 to-orange-100 rounded-lg flex items-center justify-center text-6xl">
+            <div className="aspect-square bg-gradient-to-br from-amber-100 to-orange-100 rounded-lg flex items-center justify-center text-amber-600">
               {getCategoryIcon(product.category)}
             </div>
           </div>
@@ -136,7 +137,7 @@ const ProductCard = ({ product, viewMode }: ProductCardProps) => {
       className="bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden h-full flex flex-col"
     >
       {/* Product Image */}
-      <div className="aspect-square bg-gradient-to-br from-amber-100 to-orange-100 flex items-center justify-center text-6xl">
+      <div className="aspect-square bg-gradient-to-br from-amber-100 to-orange-100 flex items-center justify-center text-amber-600">
         {getCategoryIcon(product.category)}
       </div>
 

@@ -67,3 +67,88 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--primary-brown-dark);
 }
+
+/* Typography Scale */
+.text-display-1 {
+  font-size: 4rem;
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.text-display-2 {
+  font-size: 3rem;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.text-h1 {
+  font-size: 2.5rem;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.text-h2 {
+  font-size: 2rem;
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+.text-h3 {
+  font-size: 1.5rem;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+.text-h4 {
+  font-size: 1.25rem;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+.text-body-lg {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.text-body {
+  font-size: 1rem;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.text-body-sm {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.text-caption {
+  font-size: 0.75rem;
+  line-height: 1.4;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Spacing System */
+.space-1 { margin: 0.25rem; }
+.space-2 { margin: 0.5rem; }
+.space-3 { margin: 0.75rem; }
+.space-4 { margin: 1rem; }
+.space-6 { margin: 1.5rem; }
+.space-8 { margin: 2rem; }
+.space-12 { margin: 3rem; }
+.space-16 { margin: 4rem; }
+
+.gap-1 { gap: 0.25rem; }
+.gap-2 { gap: 0.5rem; }
+.gap-3 { gap: 0.75rem; }
+.gap-4 { gap: 1rem; }
+.gap-6 { gap: 1.5rem; }
+.gap-8 { gap: 2rem; }
+.gap-12 { gap: 3rem; }
+.gap-16 { gap: 4rem; }

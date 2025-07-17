@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
+import Icon from '@/components/ui/Icon';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -75,30 +76,16 @@ const Header = () => {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden p-2 rounded-md text-gray-700 hover:text-amber-600 focus:outline-none"
+            className="lg:hidden p-2 rounded-md text-gray-700 hover:text-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 transition-colors duration-200"
+            aria-label={isMenuOpen ? 'Close mobile menu' : 'Open mobile menu'}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-menu"
           >
-            <svg
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              {isMenuOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              )}
-            </svg>
+            <Icon
+              name={isMenuOpen ? 'close' : 'menu'}
+              size="md"
+              aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+            />
           </button>
         </div>
       </div>
@@ -107,10 +94,13 @@ const Header = () => {
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
+            id="mobile-menu"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             className="lg:hidden bg-white border-t border-gray-200"
+            role="navigation"
+            aria-label="Mobile navigation menu"
           >
             <div className="px-4 py-2 space-y-1">
               {navigationItems.map((item) => {
