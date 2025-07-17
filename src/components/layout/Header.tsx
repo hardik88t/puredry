@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import Icon from '@/components/ui/Icon';
+import ThemeToggle from '@/components/ui/ThemeToggle';
+import CartIcon from '@/components/ui/CartIcon';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -22,14 +24,14 @@ const Header = () => {
   ];
 
   return (
-    <header className="bg-white shadow-lg sticky top-0 z-50">
+    <header className="bg-white dark:bg-gray-900 shadow-lg sticky top-0 z-50 transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
             <motion.div
               whileHover={{ scale: 1.05 }}
-              className="text-2xl font-bold text-amber-600"
+              className="text-2xl font-bold text-amber-600 dark:text-amber-400"
             >
               PureDry
             </motion.div>
@@ -45,8 +47,8 @@ const Header = () => {
                   href={item.href}
                   className={`px-3 py-2 text-sm font-medium transition-colors duration-200 relative ${
                     isActive
-                      ? 'text-amber-600'
-                      : 'text-gray-700 hover:text-amber-600'
+                      ? 'text-amber-600 dark:text-amber-400'
+                      : 'text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400'
                   }`}
                 >
                   {item.name}
@@ -63,8 +65,10 @@ const Header = () => {
             })}
           </nav>
 
-          {/* CTA Button */}
-          <div className="hidden lg:flex">
+          {/* CTA Button, Cart, and Theme Toggle */}
+          <div className="hidden lg:flex items-center space-x-4">
+            <CartIcon />
+            <ThemeToggle />
             <Link
               href="/contact"
               className="bg-amber-600 text-white px-6 py-2 rounded-lg hover:bg-amber-700 transition-colors duration-200"
@@ -73,20 +77,24 @@ const Header = () => {
             </Link>
           </div>
 
-          {/* Mobile menu button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden p-2 rounded-md text-gray-700 hover:text-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 transition-colors duration-200"
-            aria-label={isMenuOpen ? 'Close mobile menu' : 'Open mobile menu'}
-            aria-expanded={isMenuOpen}
-            aria-controls="mobile-menu"
-          >
-            <Icon
-              name={isMenuOpen ? 'close' : 'menu'}
-              size="md"
-              aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-            />
-          </button>
+          {/* Mobile cart, theme toggle and menu button */}
+          <div className="lg:hidden flex items-center space-x-2">
+            <CartIcon />
+            <ThemeToggle />
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="p-2 rounded-md text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 transition-colors duration-200"
+              aria-label={isMenuOpen ? 'Close mobile menu' : 'Open mobile menu'}
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-menu"
+            >
+              <Icon
+                name={isMenuOpen ? 'close' : 'menu'}
+                size="md"
+                aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+              />
+            </button>
+          </div>
         </div>
       </div>
 
@@ -98,7 +106,7 @@ const Header = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-white border-t border-gray-200"
+            className="lg:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700"
             role="navigation"
             aria-label="Mobile navigation menu"
           >
@@ -111,8 +119,8 @@ const Header = () => {
                     href={item.href}
                     className={`block px-3 py-2 rounded-md transition-colors duration-200 ${
                       isActive
-                        ? 'text-amber-600 bg-amber-50'
-                        : 'text-gray-700 hover:text-amber-600 hover:bg-gray-50'
+                        ? 'text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/20'
+                        : 'text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-gray-50 dark:hover:bg-gray-800'
                     }`}
                     onClick={() => setIsMenuOpen(false)}
                   >

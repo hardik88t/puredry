@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Product } from '@/types/product';
 import Icon from '@/components/ui/Icon';
+import AddToCartButton from '@/components/ui/AddToCartButton';
 
 interface ProductCardProps {
   product: Product;
@@ -118,9 +119,11 @@ const ProductCard = ({ product, viewMode }: ProductCardProps) => {
                   >
                     View Details
                   </Link>
-                  <button className="border border-amber-600 text-amber-600 px-6 py-2 rounded-lg hover:bg-amber-50 transition-colors">
-                    Get Quote
-                  </button>
+                  <AddToCartButton
+                    product={product}
+                    variant="secondary"
+                    size="md"
+                  />
                 </div>
               </div>
             </div>
@@ -193,9 +196,12 @@ const ProductCard = ({ product, viewMode }: ProductCardProps) => {
           >
             View Details
           </Link>
-          <button className="border border-amber-600 text-amber-600 px-4 py-2 rounded-lg text-sm font-medium hover:bg-amber-50 transition-colors">
-            Get Quote
-          </button>
+          <AddToCartButton
+            product={product}
+            variant="secondary"
+            size="sm"
+            className="w-full"
+          />
         </div>
       </div>
     </motion.div>

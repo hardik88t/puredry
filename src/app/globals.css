@@ -1,9 +1,11 @@
 @import "tailwindcss";
 
 :root {
-  /* PureDry Earth Tone Color Palette */
+  /* Light Theme - PureDry Earth Tone Color Palette */
   --background: #fefefe;
   --foreground: #2d2d2d;
+  --card-background: #ffffff;
+  --card-border: #e5e7eb;
 
   /* Primary Colors */
   --primary-brown: #8b4513;
@@ -29,11 +31,58 @@
   --text-primary: #2d2d2d;
   --text-secondary: #5d5d5d;
   --text-muted: #8d8d8d;
+
+  /* UI Colors */
+  --border-color: #e5e7eb;
+  --hover-bg: #f9fafb;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+  /* Dark Theme - PureDry Earth Tone Color Palette */
+  --background: #1a1a1a;
+  --foreground: #e5e5e5;
+  --card-background: #2d2d2d;
+  --card-border: #404040;
+
+  /* Primary Colors - Adjusted for dark theme */
+  --primary-brown: #cd853f;
+  --primary-brown-light: #daa520;
+  --primary-brown-dark: #8b4513;
+
+  /* Golden Yellow - Adjusted for dark theme */
+  --golden-yellow: #f4d03f;
+  --golden-yellow-light: #fff700;
+  --golden-yellow-dark: #daa520;
+
+  /* Fresh Green - Adjusted for dark theme */
+  --fresh-green: #32cd32;
+  --fresh-green-light: #90ee90;
+  --fresh-green-dark: #228b22;
+
+  /* Neutral Earth Tones - Adjusted for dark theme */
+  --earth-beige: #3a3a3a;
+  --earth-tan: #8b7355;
+  --earth-sand: #a0522d;
+
+  /* Text Colors */
+  --text-primary: #e5e5e5;
+  --text-secondary: #b5b5b5;
+  --text-muted: #8d8d8d;
+
+  /* UI Colors */
+  --border-color: #404040;
+  --hover-bg: #3a3a3a;
+  --shadow-color: rgba(0, 0, 0, 0.3);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-card-background: var(--card-background);
+  --color-card-border: var(--card-border);
+  --color-border: var(--border-color);
+  --color-hover-bg: var(--hover-bg);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }

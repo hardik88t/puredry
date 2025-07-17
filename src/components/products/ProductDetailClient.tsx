@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Product } from '@/types/product';
+import AddToCartButton from '@/components/ui/AddToCartButton';
 
 interface ProductDetailClientProps {
   product: Product;
@@ -152,13 +153,25 @@ const ProductDetailClient = ({ product }: ProductDetailClientProps) => {
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
-              <button className="flex-1 bg-amber-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-amber-700 transition-colors">
-                Request Quote
-              </button>
-              <button className="flex-1 border-2 border-amber-600 text-amber-600 px-8 py-3 rounded-lg font-semibold hover:bg-amber-50 transition-colors">
-                Request Sample
-              </button>
+            <div className="space-y-4">
+              <AddToCartButton
+                product={product}
+                variant="primary"
+                size="lg"
+                showQuantitySelector={true}
+                className="w-full"
+              />
+              <div className="flex flex-col sm:flex-row gap-4">
+                <button className="flex-1 border-2 border-amber-600 text-amber-600 px-8 py-3 rounded-lg font-semibold hover:bg-amber-50 dark:hover:bg-amber-900/20 transition-colors">
+                  Request Sample
+                </button>
+                <Link
+                  href="/contact"
+                  className="flex-1 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 px-8 py-3 rounded-lg font-semibold hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors text-center"
+                >
+                  Contact Us
+                </Link>
+              </div>
             </div>
           </motion.div>
         </div>
