@@ -1,79 +1,23 @@
 @import "tailwindcss";
 
-:root {
-  /* Light Theme - PureDry Earth Tone Color Palette */
-  --background: #fefefe;
-  --foreground: #2d2d2d;
-  --card-background: #ffffff;
-  --card-border: #e5e7eb;
+@theme {
+  --default-transition-duration: 200ms;
+}
 
-  /* Primary Colors */
+/* PureDry Earth Tone Color Palette */
+:root {
   --primary-brown: #8b4513;
   --primary-brown-light: #a0522d;
   --primary-brown-dark: #654321;
-
-  /* Golden Yellow */
   --golden-yellow: #daa520;
   --golden-yellow-light: #f4d03f;
   --golden-yellow-dark: #b8860b;
-
-  /* Fresh Green */
   --fresh-green: #228b22;
   --fresh-green-light: #32cd32;
   --fresh-green-dark: #006400;
-
-  /* Neutral Earth Tones */
   --earth-beige: #f5f5dc;
   --earth-tan: #d2b48c;
   --earth-sand: #c19a6b;
-
-  /* Text Colors */
-  --text-primary: #2d2d2d;
-  --text-secondary: #5d5d5d;
-  --text-muted: #8d8d8d;
-
-  /* UI Colors */
-  --border-color: #e5e7eb;
-  --hover-bg: #f9fafb;
-  --shadow-color: rgba(0, 0, 0, 0.1);
-}
-
-[data-theme="dark"] {
-  /* Dark Theme - PureDry Earth Tone Color Palette */
-  --background: #1a1a1a;
-  --foreground: #e5e5e5;
-  --card-background: #2d2d2d;
-  --card-border: #404040;
-
-  /* Primary Colors - Adjusted for dark theme */
-  --primary-brown: #cd853f;
-  --primary-brown-light: #daa520;
-  --primary-brown-dark: #8b4513;
-
-  /* Golden Yellow - Adjusted for dark theme */
-  --golden-yellow: #f4d03f;
-  --golden-yellow-light: #fff700;
-  --golden-yellow-dark: #daa520;
-
-  /* Fresh Green - Adjusted for dark theme */
-  --fresh-green: #32cd32;
-  --fresh-green-light: #90ee90;
-  --fresh-green-dark: #228b22;
-
-  /* Neutral Earth Tones - Adjusted for dark theme */
-  --earth-beige: #3a3a3a;
-  --earth-tan: #8b7355;
-  --earth-sand: #a0522d;
-
-  /* Text Colors */
-  --text-primary: #e5e5e5;
-  --text-secondary: #b5b5b5;
-  --text-muted: #8d8d8d;
-
-  /* UI Colors */
-  --border-color: #404040;
-  --hover-bg: #3a3a3a;
-  --shadow-color: rgba(0, 0, 0, 0.3);
 }
 
 @theme inline {

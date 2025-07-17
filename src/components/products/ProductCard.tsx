@@ -71,13 +71,13 @@ const ProductCard = ({ product, viewMode }: ProductCardProps) => {
                   )}
                 </div>
 
-                <h3 className="text-xl font-bold text-gray-900 mb-2">
-                  <Link href={`/products/${product.id}`} className="hover:text-amber-600 transition-colors">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+                  <Link href={`/products/${product.id}`} className="hover:text-amber-600 dark:hover:text-amber-400 transition-colors">
                     {product.name}
                   </Link>
                 </h3>
 
-                <p className="text-gray-600 mb-4 line-clamp-2">
+                <p className="text-gray-700 dark:text-gray-300 mb-4 line-clamp-2">
                   {product.shortDescription}
                 </p>
 
@@ -137,7 +137,7 @@ const ProductCard = ({ product, viewMode }: ProductCardProps) => {
     <motion.div
       whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.2 }}
-      className="bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden h-full flex flex-col"
+      className="bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden h-full flex flex-col"
     >
       {/* Product Image */}
       <div className="aspect-square bg-gradient-to-br from-amber-100 to-orange-100 flex items-center justify-center text-amber-600">
@@ -157,13 +157,13 @@ const ProductCard = ({ product, viewMode }: ProductCardProps) => {
           )}
         </div>
 
-        <h3 className="text-lg font-bold text-gray-900 mb-2 line-clamp-2">
-          <Link href={`/products/${product.id}`} className="hover:text-amber-600 transition-colors">
+        <h3 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-2 line-clamp-2">
+          <Link href={`/products/${product.id}`} className="hover:text-amber-600 dark:hover:text-amber-400 transition-colors">
             {product.name}
           </Link>
         </h3>
 
-        <p className="text-gray-600 text-sm mb-4 line-clamp-2 leading-relaxed">
+        <p className="text-gray-700 dark:text-gray-300 text-sm mb-4 line-clamp-2 leading-relaxed">
           {product.shortDescription}
         </p>
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -11,17 +11,32 @@ import ClientOnly from '@/components/ui/ClientOnly';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMoreOpen, setIsMoreOpen] = useState(false);
   const pathname = usePathname();
+  const moreDropdownRef = useRef<HTMLDivElement>(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (moreDropdownRef.current && !moreDropdownRef.current.contains(event.target as Node)) {
+        setIsMoreOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const navigationItems = [
-    { name: 'Home', href: '/' },
     { name: 'Products', href: '/products' },
-    { name: 'About Us', href: '/about' },
-    { name: 'Our Process', href: '/process' },
+    { name: 'About', href: '/about' },
     { name: 'Industries', href: '/industries' },
-    { name: 'Quality', href: '/quality' },
     { name: 'Resources', href: '/resources' },
-    { name: 'Contact', href: '/contact' },
+  ];
+
+  const moreItems = [
+    { name: 'Our Process', href: '/process' },
+    { name: 'Quality', href: '/quality' },
   ];
 
   return (
@@ -39,7 +54,7 @@ const Header = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex space-x-8">
+          <nav className="hidden lg:flex items-center space-x-6">
             {navigationItems.map((item) => {
               const isActive = pathname === item.href;
               return (
@@ -64,31 +79,75 @@ const Header = () => {
                 </Link>
               );
             })}
+
+            {/* More Dropdown */}
+            <div className="relative" ref={moreDropdownRef}>
+              <button
+                onClick={() => setIsMoreOpen(!isMoreOpen)}
+                className={`px-3 py-2 text-sm font-medium transition-colors duration-200 flex items-center ${
+                  moreItems.some(item => pathname === item.href)
+                    ? 'text-amber-600 dark:text-amber-400'
+                    : 'text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400'
+                }`}
+              >
+                More
+                <Icon name="arrow" size="sm" className={`ml-1 transition-transform ${isMoreOpen ? 'rotate-90' : ''}`} />
+              </button>
+
+              <AnimatePresence>
+                {isMoreOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="absolute top-full left-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-2 z-50"
+                  >
+                    {moreItems.map((item) => {
+                      const isActive = pathname === item.href;
+                      return (
+                        <Link
+                          key={item.name}
+                          href={item.href}
+                          onClick={() => setIsMoreOpen(false)}
+                          className={`block px-4 py-2 text-sm transition-colors ${
+                            isActive
+                              ? 'text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/20'
+                              : 'text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-gray-50 dark:hover:bg-gray-700'
+                          }`}
+                        >
+                          {item.name}
+                        </Link>
+                      );
+                    })}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </nav>
 
-          {/* CTA Button, Cart, and Theme Toggle */}
-          <div className="hidden lg:flex items-center space-x-4">
-            <ClientOnly fallback={<div className="w-10 h-10" />}>
-              <CartIcon />
-            </ClientOnly>
-            <ClientOnly fallback={<div className="w-10 h-10" />}>
+          {/* Actions */}
+          <div className="hidden lg:flex items-center space-x-3">
+            <ClientOnly fallback={<div className="w-8 h-8" />}>
               <ThemeToggle />
+            </ClientOnly>
+            <ClientOnly fallback={<div className="w-8 h-8" />}>
+              <CartIcon />
             </ClientOnly>
             <Link
               href="/contact"
-              className="bg-amber-600 text-white px-6 py-2 rounded-lg hover:bg-amber-700 transition-colors duration-200"
+              className="bg-amber-600 text-white px-5 py-2 rounded-lg hover:bg-amber-700 transition-colors duration-200 font-medium text-sm"
             >
               Get Quote
             </Link>
           </div>
 
-          {/* Mobile cart, theme toggle and menu button */}
-          <div className="lg:hidden flex items-center space-x-2">
-            <ClientOnly fallback={<div className="w-10 h-10" />}>
-              <CartIcon />
-            </ClientOnly>
-            <ClientOnly fallback={<div className="w-10 h-10" />}>
+          {/* Mobile actions */}
+          <div className="lg:hidden flex items-center space-x-1">
+            <ClientOnly fallback={<div className="w-8 h-8" />}>
               <ThemeToggle />
+            </ClientOnly>
+            <ClientOnly fallback={<div className="w-8 h-8" />}>
+              <CartIcon />
             </ClientOnly>
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -137,9 +196,34 @@ const Header = () => {
                   </Link>
                 );
               })}
+
+              {/* More items in mobile */}
+              <div className="border-t border-gray-200 dark:border-gray-700 pt-2 mt-2">
+                <div className="text-xs font-medium text-gray-500 dark:text-gray-400 px-3 py-1 uppercase tracking-wider">
+                  More
+                </div>
+                {moreItems.map((item) => {
+                  const isActive = pathname === item.href;
+                  return (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      className={`block px-3 py-2 rounded-md transition-colors duration-200 ${
+                        isActive
+                          ? 'text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/20'
+                          : 'text-gray-700 dark:text-gray-300 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-gray-50 dark:hover:bg-gray-800'
+                      }`}
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
+                  );
+                })}
+              </div>
+
               <Link
                 href="/contact"
-                className="block w-full text-center bg-amber-600 text-white px-6 py-2 rounded-lg hover:bg-amber-700 transition-colors duration-200 mt-4"
+                className="block w-full text-center bg-amber-600 text-white px-6 py-2 rounded-lg hover:bg-amber-700 transition-colors duration-200 mt-4 font-medium"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Get Quote

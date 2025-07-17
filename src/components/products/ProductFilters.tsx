@@ -99,14 +99,14 @@ const ProductFilters = ({ filters, onFiltersChange, categories, products, produc
   ];
 
   return (
-    <div className="bg-white rounded-lg shadow-md">
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
       {/* Mobile Filter Toggle */}
       <div className="lg:hidden">
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="w-full flex items-center justify-between p-4 text-left"
         >
-          <span className="font-semibold text-gray-900">Filters ({productCount} products)</span>
+          <span className="font-semibold text-gray-900 dark:text-gray-100">Filters ({productCount} products)</span>
           <svg
             className={`w-5 h-5 transform transition-transform ${isOpen ? 'rotate-180' : ''}`}
             fill="none"
@@ -119,9 +119,9 @@ const ProductFilters = ({ filters, onFiltersChange, categories, products, produc
       </div>
 
       {/* Desktop Title */}
-      <div className="hidden lg:block p-4 border-b border-gray-200">
-        <h3 className="font-semibold text-gray-900">Filters</h3>
-        <p className="text-sm text-gray-600">{productCount} products found</p>
+      <div className="hidden lg:block p-4 border-b border-gray-200 dark:border-gray-700">
+        <h3 className="font-semibold text-gray-900 dark:text-gray-100">Filters</h3>
+        <p className="text-sm text-gray-600 dark:text-gray-400">{productCount} products found</p>
       </div>
 
       {/* Filter Content */}
@@ -149,13 +149,13 @@ const ProductFilters = ({ filters, onFiltersChange, categories, products, produc
 
               {/* Category Filter */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">
                   Category
                 </label>
                 <select
                   value={filters.category || 'all'}
                   onChange={(e) => handleFilterChange('category', e.target.value === 'all' ? undefined : e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                 >
                   <option value="all">All Categories</option>
                   {categories.map((category) => (
@@ -168,13 +168,13 @@ const ProductFilters = ({ filters, onFiltersChange, categories, products, produc
 
               {/* Availability Filter */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">
                   Availability
                 </label>
                 <select
                   value={filters.availability || ''}
                   onChange={(e) => handleFilterChange('availability', e.target.value || undefined)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                 >
                   {availabilityOptions.map((option) => (
                     <option key={option.value} value={option.value}>
@@ -225,21 +225,21 @@ const ProductFilters = ({ filters, onFiltersChange, categories, products, produc
                   Price Range (USD per kg)
                 </label>
                 <div className="space-y-2">
-                  <div className="flex items-center space-x-2">
+                  <div className="grid grid-cols-5 gap-2 items-center">
                     <input
                       type="number"
                       placeholder="Min"
                       value={priceRange.min}
                       onChange={(e) => handlePriceRangeChange(Number(e.target.value), priceRange.max)}
-                      className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                      className="col-span-2 px-2 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                     />
-                    <span className="text-gray-500 dark:text-gray-400">to</span>
+                    <span className="text-center text-xs text-gray-500 dark:text-gray-400">to</span>
                     <input
                       type="number"
                       placeholder="Max"
                       value={priceRange.max}
                       onChange={(e) => handlePriceRangeChange(priceRange.min, Number(e.target.value))}
-                      className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                      className="col-span-2 px-2 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                     />
                   </div>
                 </div>
@@ -307,14 +307,14 @@ const ProductFilters = ({ filters, onFiltersChange, categories, products, produc
 
               {/* Sort Options */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label className="block text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">
                   Sort By
                 </label>
                 <div className="space-y-2">
                   <select
                     value={filters.sortBy || 'name'}
                     onChange={(e) => handleFilterChange('sortBy', e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
                   >
                     {sortOptions.map((option) => (
                       <option key={option.value} value={option.value}>
@@ -329,7 +329,7 @@ const ProductFilters = ({ filters, onFiltersChange, categories, products, produc
                       className={`flex-1 px-3 py-2 text-sm rounded-lg border ${
                         filters.sortOrder === 'asc'
                           ? 'bg-amber-600 text-white border-amber-600'
-                          : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+                          : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700'
                       }`}
                     >
                       Ascending
@@ -339,7 +339,7 @@ const ProductFilters = ({ filters, onFiltersChange, categories, products, produc
                       className={`flex-1 px-3 py-2 text-sm rounded-lg border ${
                         filters.sortOrder === 'desc'
                           ? 'bg-amber-600 text-white border-amber-600'
-                          : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+                          : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700'
                       }`}
                     >
                       Descending
@@ -366,7 +366,7 @@ const ProductFilters = ({ filters, onFiltersChange, categories, products, produc
       <div className="hidden lg:block p-4 space-y-6">
         {/* Advanced Search */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label className="block text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">
             Search Products
           </label>
           <AdvancedSearch
@@ -379,13 +379,13 @@ const ProductFilters = ({ filters, onFiltersChange, categories, products, produc
 
         {/* Category Filter */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">
             Category
           </label>
           <select
             value={filters.category || 'all'}
             onChange={(e) => handleFilterChange('category', e.target.value === 'all' ? undefined : e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
           >
             <option value="all">All Categories</option>
             {categories.map((category) => (
@@ -398,13 +398,13 @@ const ProductFilters = ({ filters, onFiltersChange, categories, products, produc
 
         {/* Availability Filter */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">
             Availability
           </label>
           <select
             value={filters.availability || ''}
             onChange={(e) => handleFilterChange('availability', e.target.value || undefined)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
           >
             {availabilityOptions.map((option) => (
               <option key={option.value} value={option.value}>
@@ -451,25 +451,25 @@ const ProductFilters = ({ filters, onFiltersChange, categories, products, produc
 
         {/* Price Range Filter */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label className="block text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">
             Price Range (USD per kg)
           </label>
           <div className="space-y-2">
-            <div className="flex items-center space-x-2">
+            <div className="grid grid-cols-5 gap-2 items-center">
               <input
                 type="number"
                 placeholder="Min"
                 value={priceRange.min}
                 onChange={(e) => handlePriceRangeChange(Number(e.target.value), priceRange.max)}
-                className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                className="col-span-2 px-2 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
               />
-              <span className="text-gray-500 dark:text-gray-400">to</span>
+              <span className="text-center text-xs text-gray-500 dark:text-gray-400">to</span>
               <input
                 type="number"
                 placeholder="Max"
                 value={priceRange.max}
                 onChange={(e) => handlePriceRangeChange(priceRange.min, Number(e.target.value))}
-                className="flex-1 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+                className="col-span-2 px-2 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
               />
             </div>
           </div>
@@ -477,7 +477,7 @@ const ProductFilters = ({ filters, onFiltersChange, categories, products, produc
 
         {/* Nutrition Filters */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label className="block text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">
             Nutritional Preferences
           </label>
           <div className="space-y-3">
@@ -537,14 +537,14 @@ const ProductFilters = ({ filters, onFiltersChange, categories, products, produc
 
         {/* Sort Options */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-gray-900 dark:text-gray-100 mb-2">
             Sort By
           </label>
           <div className="space-y-2">
             <select
               value={filters.sortBy || 'name'}
               onChange={(e) => handleFilterChange('sortBy', e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
             >
               {sortOptions.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -559,7 +559,7 @@ const ProductFilters = ({ filters, onFiltersChange, categories, products, produc
                 className={`flex-1 px-3 py-2 text-sm rounded-lg border ${
                   filters.sortOrder === 'asc'
                     ? 'bg-amber-600 text-white border-amber-600'
-                    : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+                    : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700'
                 }`}
               >
                 Ascending
@@ -569,7 +569,7 @@ const ProductFilters = ({ filters, onFiltersChange, categories, products, produc
                 className={`flex-1 px-3 py-2 text-sm rounded-lg border ${
                   filters.sortOrder === 'desc'
                     ? 'bg-amber-600 text-white border-amber-600'
-                    : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'
+                    : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700'
                 }`}
               >
                 Descending
